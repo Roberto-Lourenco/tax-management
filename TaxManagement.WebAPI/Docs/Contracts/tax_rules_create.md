@@ -41,5 +41,5 @@ A regra fiscal foi criada com sucesso. Não retorna conteúdo no corpo (conforme
 ### ⚠️ 400 Bad Request
 Indica que a requisição é inválida, geralmente devido a dados ausentes ou incorretos.
 
->Para mais detalhes de erros, consulte o arquivo de padronização de errors : `problem_details.md`.
+>Para mais detalhes de erros, consulte o arquivo de padronização de errors : [`problem_details_json.md`](problem_details_json.md).
 

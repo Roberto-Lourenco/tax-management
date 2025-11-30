@@ -57,4 +57,4 @@ Retorna os detalhes da entrada fiscal criada, incluindo o imposto calculado.
 ### ⚠️ 400 Bad Request
 Indica que a requisição é inválida, geralmente devido a dados ausentes ou incorretos.
 
->Para mais detalhes de erros, consulte o arquivo de padronização de errors : `problem_details.md`.
+>Para mais detalhes de erros, consulte o arquivo de padronização de errors : [`problem_details_json.md`](problem_details_json.md).
