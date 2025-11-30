@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Configurations\" />
-    <Folder Include="Endpoints\Routers\TaxRules\" />
+    <Folder Include="Endpoints\Routes\TaxRules\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
 

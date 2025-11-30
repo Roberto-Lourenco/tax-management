@@ -6,7 +6,7 @@ using TaxManagement.WebAPI.Extensions;
 
 namespace TaxManagement.WebAPI.Endpoints.Routers.TaxEntries;
 
-public static class TaxEntryRegistrationRouter
+public static class TaxEntryRegistrationRoute
 {
     public static async Task<Results<Ok<TaxEntryCreatedResponseDTO>, ProblemHttpResult>> HandleAsync(
         [FromBody] OrderRequestDTO orderReceivedDTO,

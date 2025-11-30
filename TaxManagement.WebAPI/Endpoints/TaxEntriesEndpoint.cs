@@ -9,7 +9,7 @@ public static class TaxEntriesEndpoint
         var group = app.MapGroup("/api/tax-entries")
                        .WithTags("Tax Entries");
 
-        group.MapPost("/", TaxEntryRegistrationRouter.HandleAsync)
+        group.MapPost("/", TaxEntryRegistrationRoute.HandleAsync)
              .WithSummary("Creates a new tax entry based on an order");
     }
 }
