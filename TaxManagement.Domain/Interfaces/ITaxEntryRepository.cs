@@ -11,7 +11,7 @@ public interface ITaxEntryRepository
     Task<TaxEntry?> GetByIdTrackingAsync(Guid id, CancellationToken ct);
     Task UpdateStatusAsync (TaxEntry taxEntry, CancellationToken ct);
 
-    // TODO: Implement filtering method when needed
+    // TODO: Implementar filtro de busca
     //Task<IQueryable<TaxEntry>> GetByFilterAsync (TaxEntryFilter filter, CancellationToken ct);
 
 }

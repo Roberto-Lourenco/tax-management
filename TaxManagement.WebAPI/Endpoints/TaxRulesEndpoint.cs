@@ -16,7 +16,7 @@ namespace TaxManagement.WebAPI.Endpoints
                  .WithSummary("Creates a new Tax Rule");
         }
 
-        // TODO: Clean architecture - Move logic to Application/Infra layer
+        // TODO: Clean architecture - Mover a logica para a camada de Application e Infrastructure
         public static async Task<Results<Created, BadRequest>> Create(TaxRuleCreatedResponseDTO dto, AppDbContext context, CancellationToken cancellationToken)
         {
             var taxRule = new TaxRule(

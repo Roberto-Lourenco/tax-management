@@ -28,7 +28,7 @@ public class TaxRule
         EffectiveDate = effectiveDate;
     }
 
-    // TODO: Add validation methods
+    // TODO: Adicionar métodos de validação
     public void Deactivate()
     {
         IsActive = false;

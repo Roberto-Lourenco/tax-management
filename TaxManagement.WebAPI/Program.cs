@@ -19,9 +19,9 @@ builder.Services.AddOpenApi(opt =>
 {
     opt.AddDocumentTransformer((doc, context, cancellationToken) =>
     {
-        doc.Info.Title = "Tax Resolver API";
+        doc.Info.Title = "Tax Management API";
         doc.Info.Version = "v1";
-        doc.Info.Description = "API de resolução de taxas fiscais.";
+        doc.Info.Description = "API de resolução de registros fiscais.";
         return Task.CompletedTask;
     });
 });
