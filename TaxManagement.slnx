@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TaxManagement.Application/TaxManagement.Application.csproj" Id="56095dce-a86b-4a59-ae92-0963bf6d9142" />
+  <Project Path="TaxManagement.Domain/TaxManagement.Domain.csproj" Id="0ed157bc-1988-4c49-bbb0-70cab2bb9473" />
+  <Project Path="TaxManagement.Infrastructure/TaxManagement.Infrastructure.csproj" Id="59a78162-8da8-411c-a8c9-4f9f862c1ace" />
+  <Project Path="TaxManagement.WebAPI/TaxManagement.WebAPI.csproj" Id="338f04cf-c4ab-46fd-b80c-387dab96662a" />
+</Solution>

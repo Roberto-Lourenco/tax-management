@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>ca325a5d-969a-4b3f-a42e-15abfd6d5bde</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Docs\Contracts\tax_entries_create.md" />
+    <Content Include="Docs\Contracts\tax_rules_create.md" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Scalar.AspNetCore" Version="2.11.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+    <Folder Include="Endpoints\Routers\TaxRules\" />
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaxManagement.Application\TaxManagement.Application.csproj" />
+    <ProjectReference Include="..\TaxManagement.Infrastructure\TaxManagement.Infrastructure.csproj" />
+  </ItemGroup>
+  
+</Project>

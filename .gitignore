@@ -1,0 +1,97 @@
+## =========================================================================
+## .NET Core & Standard (Build Results)
+## =========================================================================
+[Bb]in/
+[Oo]bj/
+.config/
+*.lock.json
+*.nupkg
+
+## =========================================================================
+## Visual Studio & IDEs
+## =========================================================================
+# Comentar se usar config de debug compartilhada
+.vs/
+.vscode/
+
+# Descomentar se usar config de debug compartilhada
+# .vscode/launch.json
+# .vscode/tasks.json
+# !.vscode/extensions.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ReSharper / Rider
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+
+## =========================================================================
+## Entity Framework Core
+## =========================================================================
+# Ignorar scripts SQL gerados manualmente (ex: Script-Migration)
+*.sql
+
+# Ignorar executáveis de bundle (se usar 'dotnet ef migrations bundle')
+efbundle
+efbundle.exe
+
+# Diagramas gerados por ferramentas
+*.dgml
+
+## =========================================================================
+## Environment & Secrets (CRÍTICO)
+## =========================================================================
+# Arquivos de ambiente locais
+.env
+.env.local
+.env.*.local
+
+# AppSettings
+appsettings.Local.json
+appsettings.Production.json
+appsettings.Secrets.json
+
+# User Secrets do .NET
+secrets.json
+
+## =========================================================================
+## Logs & Diagnostics
+## =========================================================================
+*.log
+*.txt
+*.dump
+
+## =========================================================================
+## Test Results & Coverage
+## =========================================================================
+TestResults/
+*.trdx
+*.visualstudio.testsettings
+*.coverage
+*.coveragexml
+
+## =========================================================================
+## Docker
+## =========================================================================
+docker-compose.override.yml
+.dockerignore
+
+## =========================================================================
+## OS Specifics
+## =========================================================================
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+
+# Linux
+*~
