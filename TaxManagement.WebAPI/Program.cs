@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 
     app.MapScalarApiReference(opt =>
     {
-        opt.Title = "Documentação API Tax Resolver";
+        opt.Title = "Documentação API Tax Management";
         opt.Theme = ScalarTheme.DeepSpace;
         opt.DefaultHttpClient = new(ScalarTarget.CSharp, ScalarClient.HttpClient);
     });
