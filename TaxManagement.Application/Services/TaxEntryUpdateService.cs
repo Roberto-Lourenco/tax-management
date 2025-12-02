@@ -12,7 +12,8 @@ public class TaxEntryUpdateService(ITaxEntryRepository taxEntryRepository)
         var taxEntry = await taxEntryRepository.GetByIdTrackingAsync(id, ct);
 
         if (taxEntry is null)
-            return Result.Failure<TaxEntry>(TaxEntryErrors.TaxEntryNotFound);
+            return Result.Failure<TaxEntry>(Error.NotFound("TaxEntry.NotFound",
+                $"Não foi encontrado nenhum Registro Fiscal correspondente ao ID informado."));
 
         var updateStatusResult = taxEntry.UpdateStatus(newStatus);
 

@@ -1,66 +1,105 @@
 ﻿using TaxManagement.Domain.Common;
+using TaxManagement.Domain.Entities;
 
 namespace TaxManagement.Domain.Errors;
 
+// Display name simples para campos de TaxEntry, utilizado apenas em mensagens de erro.
+// Como não haverá internacionalização, os nomes estarão em português
+internal static class TaxEntryDisplay
+{
+    internal const string OrderId = "Ordem de pedido";
+    internal const string OrderDate = "Data do pedido";
+    internal const string Status = "Status";
+    internal const string CompetenceDate = "Data de competência";
+    internal const string TaxRuleId = "ID da Regra fiscal";
+    internal const string TotalOrderAmount = "Valor total do pedido";
+    internal const string TotalOrderTax = "Imposto total do pedido";
+    internal const string PaymentAuthenticationCode = "Código de autenticação de pagamento";
+}
+
 public static class TaxEntryErrors
 {
-    public static readonly Error TaxEntryNotFound = Error.NotFound(
-        "TaxEntry.Entity.NotFound",
-        "Nenhum Registro Fiscal encontrado.");
+    private readonly static DomainRuleFactory Rule = new(nameof(TaxEntry));
 
-    public static readonly Error OrderIdAlreadyExists = Error.Conflict(
-        "TaxEntry.OrderId.AlreadyExists",
-        "Já existe um Registro Fiscal com o mesmo ID de Pedido.");
+    // OrderId
+    public static readonly Error OrderIdRequired = Rule.Required(
+        nameof(TaxEntry.OrderId),
+        TaxEntryDisplay.OrderId);
 
-    public static readonly Error TotalOrderAmountMustBePositive = Error.Validation(
-        "TaxEntry.TotalOrderAmount.MustBePositive",
-        "O valor total do pedido deve ser maior que zero.");
+    public static readonly Error OrderIdAlreadyExists = Rule.AlreadyExists(
+        nameof(TaxEntry.OrderId),
+        TaxEntryDisplay.OrderId);
 
-    public static readonly Error TotalOrderTaxMustBePositive = Error.Validation(
-        "TaxEntry.TotalOrderTax.MustBePositive",
-        "O valor total do imposto deve ser maior que zero");
+    // TotalOrderAmount
+    public static readonly Error TotalOrderAmountRequired = Rule.Required(
+        nameof(TaxEntry.TotalOrderAmount),
+        TaxEntryDisplay.TotalOrderAmount);
 
-    public static readonly Error OrderDateRequired = Error.Validation(
-    "TaxEntry.OrderDate.Required",
-    "A data do pedido é obrigatória.");
+    public static readonly Error TotalOrderAmountCannotBeNegative = Rule.CannotBeNegative(
+        nameof(TaxEntry.TotalOrderAmount),
+        TaxEntryDisplay.TotalOrderAmount);
 
-    public static readonly Error OrderDateCannotBeFuture = Error.Validation(
-        "TaxEntry.OrderDate.CannotBeFuture",
-        "A data do pedido não pode ser futura.");
+    // TotalOrderTax
+    public static readonly Error TotalOrderTaxRequired = Rule.Required(
+        nameof(TaxEntry.TotalOrderTax),
+        TaxEntryDisplay.TotalOrderTax);
 
-    public static readonly Error CompetenceDateCannotBeBeforeCurrent = Error.Validation(
-        "TaxEntry.CompetenceDate.CannotBeBeforeCurrent",
-        "A nova data de competência não pode ser anterior à atual.");
+    public static readonly Error TotalOrderTaxCannotBeNegative = Rule.CannotBeNegative(
+        nameof(TaxEntry.TotalOrderTax),
+        TaxEntryDisplay.TotalOrderTax);
 
-    public static readonly Error CompetenceDateMaxOneMonthDelayExceeded = Error.Validation(
-        "TaxEntry.CompetenceDate.MaxOneMonthDelayExceeded",
-        "A nova data de competência excede o limite máximo permitido de atraso (1 mês).");
+    // OrderDate
+    public static readonly Error OrderDateRequired = Rule.Required(
+        nameof(TaxEntry.OrderDate),
+        TaxEntryDisplay.OrderDate);
 
-    public static readonly Error CompetenceDateInvalid = Error.Validation(
-        "TaxEntry.CompetenceDate.InvalidDate",
-        "A data de competência informada é inválida.");
+    public static readonly Error OrderDateInvalid = Rule.InvalidFormat(
+        nameof(TaxEntry.OrderDate),
+        TaxEntryDisplay.OrderDate);
 
-    public static readonly Error StatusInvalidTransitionFromPaid = Error.Validation(
-        "TaxEntry.Status.InvalidTransitionFromPaid",
-        "Não é possível reverter um status Pago para Pendente.");
+    public static readonly Error OrderDateCannotBeFuture = Rule.New(
+        nameof(TaxEntry.OrderDate),
+        "CannotBeFuture",
+        $"A {TaxEntryDisplay.OrderDate} não pode estar em uma data futura."
+        );
 
-    public static readonly Error CompetenceDateFiscalYearChangeNotAllowed = Error.Validation(
-        "TaxEntry.CompetenceDate.FiscalYearChangeNotAllowed",
-        "A alteração do ano de competência não é permitida.");
+    // CompetenceDate
+    public static readonly Error CompetenceDateRequired = Rule.Required(
+        nameof(TaxEntry.CompetenceDate),
+        TaxEntryDisplay.CompetenceDate);
 
-    public static readonly Error StatusMustBeDifferent = Error.Validation(
-        "TaxEntry.Status.MustBeDifferent",
-        "O novo status deve ser diferente do atual.");
+    public static readonly Error CompetenceDateCannotBeBeforeCurrent = Rule.New(
+        nameof(TaxEntry.CompetenceDate),
+        "CannotBeBeforeCurrent",
+        $"A nova {TaxEntryDisplay.CompetenceDate} não pode ser anterior à atual.");
 
-    public static readonly Error PaymentCannotBeSetManually = Error.Validation(
-        "TaxEntry.Payment.CannotBeSetManually",
-        "O pagamento não pode ser registrado manualmente.");
+    public static readonly Error CompetenceDateMaxOneMonthDelayExceeded = Rule.New(
+        nameof(TaxEntry.CompetenceDate),
+        "MaxOneMonthDelayExceeded",
+        $"A nova {TaxEntryDisplay.CompetenceDate} excede o limite máximo permitido de atraso (1 mês).");
 
-    public static readonly Error AuthenticationCodeInvalid = Error.Validation(
-        "TaxEntry.AuthenticationCode.Invalid",
-        "O código de autenticação do pagamento é inválido.");
+    public static readonly Error CompetenceDateInvalid = Rule.InvalidFormat(
+        nameof(TaxEntry.CompetenceDate),
+        TaxEntryDisplay.CompetenceDate);
 
-    public static readonly Error OrderDateMustBeUtc = Error.Validation(
-        "TaxEntry.OrderDate.MustBeUtc",
-        "A data do pedido fornecida deve estar no formato UTC (GMT +0).");
+    public static readonly Error CompetenceDateFiscalYearChangeNotAllowed = Rule.New(
+        nameof(TaxEntry.CompetenceDate),
+        "FiscalYearChangeNotAllowed",
+        $"A alteração do ano da {TaxEntryDisplay.CompetenceDate} não é permitida.");
+
+    // Status
+    public static readonly Error StatusInvalidTransitionFromPaid = Rule.New(
+        nameof(TaxEntry.Status),
+        "InvalidTransitionFromPaid",
+        $"Não é possível reverter um {TaxEntryDisplay.Status} Pago para Pendente.");
+
+    public static readonly Error StatusMustBeDifferent = Rule.New(
+        nameof(TaxEntry.Status),
+        "MustBeDifferent",
+        $"O novo {TaxEntryDisplay.Status} deve ser diferente do atual.");
+
+    // PaymentAuthenticationCode
+    public static readonly Error PaymentAuthenticationCodeInvalid = Rule.InvalidFormat(
+        nameof(TaxEntry.PaymentAuthenticationCode),
+        TaxEntryDisplay.PaymentAuthenticationCode);
 }

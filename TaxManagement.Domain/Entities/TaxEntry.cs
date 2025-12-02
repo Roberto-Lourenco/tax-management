@@ -12,7 +12,7 @@ public enum TaxEntryStatusEnum
     Failed
 }
 
-public class TaxEntry
+public sealed class TaxEntry
 {
     public Guid Id { get; init; }
     public Guid OrderId { get; init; }
@@ -43,9 +43,9 @@ public class TaxEntry
 
         var validation = ValidationError.Compose(
             Result.Ensure(totalOrderAmount > 0,
-            TaxEntryErrors.TotalOrderAmountMustBePositive),
+            TaxEntryErrors.TotalOrderAmountCannotBeNegative),
             Result.Ensure(totalOrderTax > 0,
-            TaxEntryErrors.TotalOrderTaxMustBePositive),
+            TaxEntryErrors.TotalOrderTaxCannotBeNegative),
             Result.Ensure(orderDate != default, TaxEntryErrors.OrderDateRequired),
             Result.Ensure(orderDate <= DateTimeOffset.UtcNow.AddMinutes(5), TaxEntryErrors.OrderDateCannotBeFuture)
         );
@@ -92,7 +92,7 @@ public class TaxEntry
     {
         var validation = ValidationError.Compose(
             Result.Ensure(!string.IsNullOrWhiteSpace(paymentAuthenticationCode),
-            TaxEntryErrors.AuthenticationCodeInvalid)
+            TaxEntryErrors.PaymentAuthenticationCodeInvalid)
         );
 
         if (validation.IsFailure)

@@ -1,6 +1,6 @@
 ﻿namespace TaxManagement.Domain.Entities;
 
-public class TaxRule
+public sealed class TaxRule
 {
     public Guid Id { get; init; }
     public string OriginState { get; init; } = "RJ";

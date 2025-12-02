@@ -1,5 +1,16 @@
 ﻿namespace TaxManagement.Domain.Common;
 
+public enum ErrorType
+{
+    None,
+    Problem,
+    Validation,
+    NotFound,
+    UnprocessableEntity,
+    Conflict,
+    Unauthorized
+}
+
 public record Error
 {
     public Error(string code, string description, ErrorType type)
@@ -8,6 +19,7 @@ public record Error
         Description = description;
         Type = type;
     }
+
     public string Code { get; }
     public string Description { get; }
     public ErrorType Type { get; }
@@ -38,15 +50,3 @@ public record Error
         new(code, description, ErrorType.Unauthorized);
 
 }
-
-public enum ErrorType
-{
-    None,
-    Problem,
-    Validation,
-    NotFound,
-    UnprocessableEntity,
-    Conflict,
-    Unauthorized
-}
-
