@@ -28,10 +28,16 @@ internal sealed class TaxEntryConfiguration : IEntityTypeConfiguration<TaxEntry>
             .IsRequired();
 
         builder.Property(t => t.TotalOrderAmount)
+            .HasConversion(
+                    v => v.Amount,
+                    v => new Money(v))
             .HasPrecision(18, 2)
             .IsRequired();
 
         builder.Property(t => t.TotalOrderTax)
+            .HasConversion(
+                    v => v.Amount,
+                    v => new Money(v))
             .HasPrecision(18, 2)
             .IsRequired();
 

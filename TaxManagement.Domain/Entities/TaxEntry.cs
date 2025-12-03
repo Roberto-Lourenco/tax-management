@@ -20,8 +20,8 @@ public sealed class TaxEntry
     public TaxEntryStatusEnum Status { get; set; }
     public CompetenceDate CompetenceDate { get; private set; }
     public Guid TaxRuleId { get; private set; }
-    public decimal TotalOrderAmount { get; init; }
-    public decimal TotalOrderTax { get; private set; }
+    public Money TotalOrderAmount { get; init; }
+    public Money TotalOrderTax { get; private set; }
     public string? PaymentAuthenticationCode { get; private set; }
     public DateTimeOffset? PaymentDate { get; private set; }
     public DateTime CreatedAt { get; init; }
@@ -29,6 +29,8 @@ public sealed class TaxEntry
     private TaxEntry()
     {
         CompetenceDate = null!;
+        TotalOrderAmount = null!;
+        TotalOrderTax = null!;
     }
 
     public static Result<TaxEntry> Create(
@@ -63,8 +65,8 @@ public sealed class TaxEntry
             Status = TaxEntryStatusEnum.Pending,
             CompetenceDate = newCompetenceDate,
             TaxRuleId = taxRuleId,
-            TotalOrderAmount = totalOrderAmount,
-            TotalOrderTax = totalOrderTax,
+            TotalOrderAmount = new Money(totalOrderAmount),
+            TotalOrderTax = new Money(totalOrderTax),
             CreatedAt = DateTime.UtcNow
         };
     }
