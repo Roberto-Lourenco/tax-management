@@ -4,4 +4,4 @@ public record TaxEntryCreatedResponseDTO(
     Guid Id,
     Guid OrderId,
     decimal TotalOrderTax,
-    DateTime CreatedAt);
+    DateTimeOffset CreatedAt);
